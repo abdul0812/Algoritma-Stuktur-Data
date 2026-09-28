@@ -106,6 +106,29 @@ C. UJI LOGIKA / TRACE TABLE
 
 ---
 
+## Trace Table Kasus A
+
+| No. | Proses | Nilai/Hasil |
+|---|---|---|
+| 1 | `is_member` | `TRUE` |
+| 2 | `jumlah_buku` | `4` |
+| 3 | `total_awal` | Rp250.000 |
+| 4 | `total_awal < 0` | `FALSE` |
+| 5 | `jumlah_buku < 1` | `FALSE` |
+| 6 | Input valid | Ya |
+| 7 | `is_member = TRUE` | `TRUE` |
+| 8 | `total_awal >= 200000` | `TRUE` |
+| 9 | `jumlah_buku >= 3` | `TRUE` |
+| 10 | `persentase_diskon` | `15%` |
+| 11 | `nominal_diskon = 250000 × 15%` | Rp37.500 |
+| 12 | `total_bayar = 250000 - 37500` | Rp212.500 |
+```
+
+ # TRACE TABLE
+## Sistem Transaksi & Validasi Toko Buku Modern
+
+---
+
 ## Kasus A
 
 ### Input
@@ -114,85 +137,268 @@ C. UJI LOGIKA / TRACE TABLE
 is_member = TRUE
 jumlah_buku = 4
 total_awal = 250000
-Trace Table Kasus A
-No.
-Proses
-Nilai/Hasil
-1
-is_member
-TRUE
-2
-jumlah_buku
-4
-3
-total_awal
-Rp250.000
-4
-total_awal < 0
-FALSE
-5
-jumlah_buku < 1
-FALSE
-6
-Input valid
-Ya
-7
-is_member = TRUE
-TRUE
-8
-total_awal >= 200000
-TRUE
-9
-jumlah_buku >= 3
-TRUE
-10
-persentase_diskon
-15%
-11
-nominal_diskon = 250000 × 15%
-Rp37.500
-12
-total_bayar = 250000 - 37500
-Rp212.500
+```
+
+### Trace Table Kasus A
+
+| No. | Proses | Nilai/Hasil |
+|---|---|---|
+| 1 | `is_member` | `TRUE` |
+| 2 | `jumlah_buku` | `4` |
+| 3 | `total_awal` | Rp250.000 |
+| 4 | `total_awal < 0` | `FALSE` |
+| 5 | `jumlah_buku < 1` | `FALSE` |
+| 6 | Input valid | Ya |
+| 7 | `is_member = TRUE` | `TRUE` |
+| 8 | `total_awal >= 200000` | `TRUE` |
+| 9 | `jumlah_buku >= 3` | `TRUE` |
+| 10 | `persentase_diskon` | `15%` |
+| 11 | `nominal_diskon = 250000 × 15%` | Rp37.500 |
+| 12 | `total_bayar = 250000 - 37500` | Rp212.500 |
+
+### Hasil Kasus A
+
+```text
+Nominal Diskon = Rp37.500
+Total Bayar = Rp212.500
+```
+
+---
+
+## Kasus B
+
+### Input
+
+```text
+is_member = FALSE
+jumlah_buku = 2
+total_awal = 350000
+```
+
+### Trace Table Kasus B
+
+| No. | Proses | Nilai/Hasil |
+|---|---|---|
+| 1 | `is_member` | `FALSE` |
+| 2 | `jumlah_buku` | `2` |
+| 3 | `total_awal` | Rp350.000 |
+| 4 | `total_awal < 0` | `FALSE` |
+| 5 | `jumlah_buku < 1` | `FALSE` |
+| 6 | Input valid | Ya |
+| 7 | `is_member = TRUE` | `FALSE` |
+| 8 | Masuk kondisi Non-Member | Ya |
+| 9 | `total_awal >= 300000` | `TRUE` |
+| 10 | `persentase_diskon` | `5%` |
+| 11 | `nominal_diskon = 350000 × 5%` | Rp17.500 |
+| 12 | `total_bayar = 350000 - 17500` | Rp332.500 |
 
 ### Hasil Kasus B
 
-- Nominal Diskon = **Rp17.500**
-- Total Bayar = **Rp332.500**
+```text
+Nominal Diskon = Rp17.500
+Total Bayar = Rp332.500
+```
 
-### Hasil Kasus C
+---
 
-- Nominal Diskon = **Rp0**
-- Total Bayar = **Rp100.000**
-
-## Trace Table Kasus C
+## Kasus C
 
 ### Input Awal
 
+```text
+is_member = FALSE
+jumlah_buku = 1
+total_awal = -50000
+```
+
+### Trace Table Input Awal
+
 | No. | Proses | Nilai/Hasil |
-|---:|---|---|
-| 1 | `is_member` | FALSE |
-| 2 | `jumlah_buku` | 1 |
+|---|---|---|
+| 1 | `is_member` | `FALSE` |
+| 2 | `jumlah_buku` | `1` |
 | 3 | `total_awal` | -Rp50.000 |
-| 4 | `total_awal < 0` | TRUE |
-| 5 | `jumlah_buku < 1` | FALSE |
-| 6 | Input valid | **Tidak** |
+| 4 | `total_awal < 0` | `TRUE` |
+| 5 | `jumlah_buku < 1` | `FALSE` |
+| 6 | Input valid | Tidak |
 | 7 | Sistem meminta input ulang | Ya |
 
 ### Input Setelah Dikoreksi
 
+```text
+is_member = FALSE
+jumlah_buku = 1
+total_awal = 100000
+```
+
+### Trace Table Setelah Input Ulang
+
 | No. | Proses | Nilai/Hasil |
-|---:|---|---|
-| 8 | `is_member` | FALSE |
-| 9 | `jumlah_buku` | 1 |
+|---|---|---|
+| 8 | `is_member` | `FALSE` |
+| 9 | `jumlah_buku` | `1` |
 | 10 | `total_awal` | Rp100.000 |
-| 11 | `total_awal < 0` | FALSE |
-| 12 | `jumlah_buku < 1` | FALSE |
+| 11 | `total_awal < 0` | `FALSE` |
+| 12 | `jumlah_buku < 1` | `FALSE` |
 | 13 | Input valid | Ya |
-| 14 | `is_member = TRUE` | FALSE |
+| 14 | `is_member = TRUE` | `FALSE` |
 | 15 | Masuk kondisi Non-Member | Ya |
-| 16 | `total_awal >= 300000` | FALSE |
-| 17 | `persentase_diskon` | 0% |
+| 16 | `total_awal >= 300000` | `FALSE` |
+| 17 | `persentase_diskon` | `0%` |
 | 18 | `nominal_diskon = 100000 × 0%` | Rp0 |
-| 19 | `total_bayar = 100000 - 0` | **Rp100.000** |
+| 19 | `total_bayar = 100000 - 0` | Rp100.000 |
+
+### Hasil Kasus C
+
+```text
+Nominal Diskon = Rp0
+Total Bayar = Rp100.000
+```
+
+---
+# TRACE TABLE
+## Sistem Transaksi & Validasi Toko Buku Modern
+
+---
+
+## Kasus A
+
+### Input
+
+```text
+is_member = TRUE
+jumlah_buku = 4
+total_awal = 250000
+```
+
+### Trace Table Kasus A
+
+| No. | Proses | Nilai/Hasil |
+|---|---|---|
+| 1 | `is_member` | `TRUE` |
+| 2 | `jumlah_buku` | `4` |
+| 3 | `total_awal` | Rp250.000 |
+| 4 | `total_awal < 0` | `FALSE` |
+| 5 | `jumlah_buku < 1` | `FALSE` |
+| 6 | Input valid | Ya |
+| 7 | `is_member = TRUE` | `TRUE` |
+| 8 | `total_awal >= 200000` | `TRUE` |
+| 9 | `jumlah_buku >= 3` | `TRUE` |
+| 10 | `persentase_diskon` | `15%` |
+| 11 | `nominal_diskon = 250000 × 15%` | Rp37.500 |
+| 12 | `total_bayar = 250000 - 37500` | Rp212.500 |
+
+### Hasil Kasus A
+
+```text
+Nominal Diskon = Rp37.500
+Total Bayar = Rp212.500
+```
+
+---
+
+## Kasus B
+
+### Input
+
+```text
+is_member = FALSE
+jumlah_buku = 2
+total_awal = 350000
+```
+
+### Trace Table Kasus B
+
+| No. | Proses | Nilai/Hasil |
+|---|---|---|
+| 1 | `is_member` | `FALSE` |
+| 2 | `jumlah_buku` | `2` |
+| 3 | `total_awal` | Rp350.000 |
+| 4 | `total_awal < 0` | `FALSE` |
+| 5 | `jumlah_buku < 1` | `FALSE` |
+| 6 | Input valid | Ya |
+| 7 | `is_member = TRUE` | `FALSE` |
+| 8 | Masuk kondisi Non-Member | Ya |
+| 9 | `total_awal >= 300000` | `TRUE` |
+| 10 | `persentase_diskon` | `5%` |
+| 11 | `nominal_diskon = 350000 × 5%` | Rp17.500 |
+| 12 | `total_bayar = 350000 - 17500` | Rp332.500 |
+
+### Hasil Kasus B
+
+```text
+Nominal Diskon = Rp17.500
+Total Bayar = Rp332.500
+```
+
+---
+
+## Kasus C
+
+### Input Awal
+
+```text
+is_member = FALSE
+jumlah_buku = 1
+total_awal = -50000
+```
+
+### Trace Table Input Awal
+
+| No. | Proses | Nilai/Hasil |
+|---|---|---|
+| 1 | `is_member` | `FALSE` |
+| 2 | `jumlah_buku` | `1` |
+| 3 | `total_awal` | -Rp50.000 |
+| 4 | `total_awal < 0` | `TRUE` |
+| 5 | `jumlah_buku < 1` | `FALSE` |
+| 6 | Input valid | Tidak |
+| 7 | Sistem meminta input ulang | Ya |
+
+### Input Setelah Dikoreksi
+
+```text
+is_member = FALSE
+jumlah_buku = 1
+total_awal = 100000
+```
+
+### Trace Table Setelah Input Ulang
+
+| No. | Proses | Nilai/Hasil |
+|---|---|---|
+| 8 | `is_member` | `FALSE` |
+| 9 | `jumlah_buku` | `1` |
+| 10 | `total_awal` | Rp100.000 |
+| 11 | `total_awal < 0` | `FALSE` |
+| 12 | `jumlah_buku < 1` | `FALSE` |
+| 13 | Input valid | Ya |
+| 14 | `is_member = TRUE` | `FALSE` |
+| 15 | Masuk kondisi Non-Member | Ya |
+| 16 | `total_awal >= 300000` | `FALSE` |
+| 17 | `persentase_diskon` | `0%` |
+| 18 | `nominal_diskon = 100000 × 0%` | Rp0 |
+| 19 | `total_bayar = 100000 - 0` | Rp100.000 |
+
+### Hasil Kasus C
+
+```text
+Nominal Diskon = Rp0
+Total Bayar = Rp100.000
+```
+
+---
+
+# REKAPITULASI HASIL TRACE TABLE
+
+| Kasus | Status Member | Total Awal | Jumlah Buku | Diskon | Nominal Diskon | Total Bayar |
+|---|---|---:|---:|---:|---:|---:|
+| A | Member | Rp250.000 | 4 | 15% | Rp37.500 | Rp212.500 |
+| B | Non-Member | Rp350.000 | 2 | 5% | Rp17.500 | Rp332.500 |
+| C | Non-Member | Rp100.000* | 1 | 0% | Rp0 | Rp100.000 |
+
+> **Catatan:**  
+> `*` Pada Kasus C, nilai `Rp100.000` merupakan nilai setelah input awal `-Rp50.000` dinyatakan tidak valid dan sistem meminta pengguna melakukan input ulang.
+
+
 
